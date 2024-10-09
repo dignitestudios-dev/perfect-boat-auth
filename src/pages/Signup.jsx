@@ -127,21 +127,6 @@ const Signup = () => {
           </div>
           <div className="pt-4">
             <AuthSubmitBtn text={"Sign Up"} loader={loading} />
-            <div className="w-full h-auto flex flex-col justify-start items-start">
-              <div className="w-full lg:w-[434px] pt-2 flex justify-center items-center">
-                <span className="text-[13px] font-medium text-[#C2C6CB]">
-                  Already have an account?
-                </span>
-                <button
-                  className="pl-1 outline-none text-[13px] border-none text-[#199BD1] font-bold"
-                  onClick={() => {
-                    navigate("/login");
-                  }}
-                >
-                  Login
-                </button>
-              </div>
-            </div>
           </div>
 
           <SocialLogin />

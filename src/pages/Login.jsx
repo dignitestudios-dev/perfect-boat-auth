@@ -74,7 +74,7 @@ const Login = () => {
         if (response?.data?.data?.isEmailVerified === true) {
           sessionStorage.setItem("token", response?.data?.data?.token);
           if (response?.data?.data?.isSubscribed === true) {
-            navigate("/congrats");
+            navigate("/update-plan");
           } else {
             navigate("/buy-package");
           }
@@ -96,7 +96,9 @@ const Login = () => {
   }
 
   useEffect(()=>{
-    handleTokenLogin()
+    if(token){
+      handleTokenLogin()
+    }
   },[token])
 
   return (

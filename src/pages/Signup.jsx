@@ -101,7 +101,7 @@ const Signup = () => {
               type={"text"}
               error={errors.phoneNumber}
               onInput={(e) => {
-                e.target.value = e.target.value.replace(/(?!^\+)[^\d]/g, ""); 
+                e.target.value = e.target.value.replace(/(?!^\+)[^\d]/g, ""); // Allow only digits
               }}
             />
 

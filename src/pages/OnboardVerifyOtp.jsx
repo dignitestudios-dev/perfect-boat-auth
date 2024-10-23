@@ -88,6 +88,7 @@ const OnboardVerifyOtp = () => {
         // navigate("/select-package");
         SuccessToast(response?.data?.message);
         setResendLoading(false);
+        setOtp(Array(6).fill(""))
       } else {
         ErrorToast(response?.data?.message);
       }
@@ -120,6 +121,7 @@ const OnboardVerifyOtp = () => {
           <div className="w-full h-auto grid grid-cols-6 justify-start items-center gap-4 my-4 ">
             {otp.map((digit, index) => (
               <input
+              inputmode="numeric"
                 key={index}
                 type="text"
                 maxLength="1"
@@ -127,7 +129,8 @@ const OnboardVerifyOtp = () => {
                 onChange={(e) => handleChange(e, index)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 ref={(el) => (inputs.current[index] = el)}
-                className=" h-[50px] md:h-[54px] rounded-lg bg-transparent outline-none text-center border-[1px] border-[#c2c6cb] text-white md:text-2xl text-xl focus-within:border-[#55C9FA] flex items-center justify-center"
+                className=" h-[50px] md:h-[54px] rounded-lg bg-transparent outline-none text-center border-[1px]
+                 border-[#c2c6cb] text-white md:text-2xl text-xl focus-within:border-[#55C9FA] flex items-center justify-center"
               />
             ))}
           </div>

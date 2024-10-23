@@ -92,7 +92,7 @@ const Signup = () => {
               register={register("phoneNumber", {
                 required: "Please enter your phone number.",
                 pattern: {
-                  value: /^[0-9]{10}$/,
+                  value: /^\+?[0-9]{11}$/,
                   message: "Please enter a valid phone number.",
                 },
               })}
@@ -101,7 +101,7 @@ const Signup = () => {
               type={"text"}
               error={errors.phoneNumber}
               onInput={(e) => {
-                e.target.value = e.target.value.replace(/[^0-9]/g, ""); // Allow only digits
+                e.target.value = e.target.value.replace(/(?!^\+)[^\d]/g, ""); 
               }}
             />
 
@@ -129,7 +129,7 @@ const Signup = () => {
             <AuthSubmitBtn text={"Sign Up"} loader={loading} />
             <div className="w-full h-auto flex flex-col justify-start items-start">
               <div className="w-full lg:w-[434px] pt-2 flex justify-center items-center">
-                <span className="text-[13px] font-medium text-[#C2C6CB]">
+                {/* <span className="text-[13px] font-medium text-[#C2C6CB]">
                   Already have an account?
                 </span>
                 <button
@@ -139,7 +139,7 @@ const Signup = () => {
                   }}
                 >
                   Login
-                </button>
+                </button> */}
               </div>
             </div>
           </div>

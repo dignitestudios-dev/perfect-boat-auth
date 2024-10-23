@@ -17,12 +17,14 @@ const Summary = () => {
     try {
       setSummaryLoading(true);
       const { data } = await axios.get("/owner/subscription/getSummary");
-      setSummary(data?.data);
+      if(data){
+        setSummary(data?.data);
+        setSummaryLoading(false);
+      }
     } catch (error) {
       console.log("Error:", error);
-    } finally {
       setSummaryLoading(false);
-    }
+    } 
   };
 
   useEffect(() => {

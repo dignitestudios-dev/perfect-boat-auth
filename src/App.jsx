@@ -8,6 +8,7 @@ import Signup from './pages/Signup';
 import OnboardVerifyOtp from './pages/OnboardVerifyOtp';
 import PageNotFound from './pages/PageNotFound';
 import Login from './pages/Login';
+import UpdatePlan from './pages/UpdatePlan';
 
 function App() {
 
@@ -18,7 +19,8 @@ function App() {
       <Route path='/summary' element={<Summary />}/>
       <Route path='/congrats' element={<Congratulations />}/>
       <Route path='/' element={<Signup />}/>
-      <Route path='/login' element={<Login />}/>
+      <Route path='/login/:token' element={<Login />}/>
+      <Route path='/update-plan' element={<UpdatePlan/>}/>
       <Route path='/onboard-verify-otp' element={<OnboardVerifyOtp />}/>
       <Route path='*' element={<PageNotFound/>}/>
     </Routes>

@@ -69,22 +69,25 @@ const Signup = () => {
                 },
               })}
               text={"Name"}
-              placeholder={"e.g. Mike Smith"}
+              placeholder={"Enter your name here"}
               type={"text"}
               error={errors.fullName}
+              onInput={(e) => {
+                e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, "");
+              }}
             />
 
             <AuthInput
               register={register("email", {
                 required: "Please enter your email address.",
                 pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, // Simple email pattern
                   message: "Please enter a valid email address.",
                 },
               })}
               text={"Email"}
-              placeholder={"Type your email address here"}
-              type={"email"}
+              placeholder={"Enter your email address here"}
+              type={"text"}
               error={errors.email}
             />
 
@@ -92,25 +95,27 @@ const Signup = () => {
               register={register("phoneNumber", {
                 required: "Please enter your phone number.",
                 pattern: {
-                  value: /^\+?[0-9]{11}$/,
+                  value: /^[0-9]{10}$/,
                   message: "Please enter a valid phone number.",
                 },
               })}
+              maxLength="10"
               text={"Phone Number"}
-              placeholder={"Type your phone number here"}
+              placeholder={"Enter your phone number here"}
               type={"text"}
               error={errors.phoneNumber}
               onInput={(e) => {
-                e.target.value = e.target.value.replace(/(?!^\+)[^\d]/g, ""); // Allow only digits
+                e.target.value = e.target.value.replace(/\D/g, "");
               }}
+              isPhone={true}
             />
 
             <AuthInput
               register={register("password", {
                 required: "Please enter your password.",
                 minLength: {
-                  value: 6,
-                  message: "Password must be at least 6 characters long.",
+                  value: 8,
+                  message: "Password must be at least 8 characters long.",
                 },
                 pattern: {
                   value:
@@ -119,8 +124,9 @@ const Signup = () => {
                     "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
                 },
               })}
+              maxLength={12}
               text={"Password"}
-              placeholder={"Enter Password"}
+              placeholder={"Enter your password here"}
               type={"password"}
               error={errors.password}
             />

@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 
-const PaymentInput = ({ state, setState, text, type, error, placeholder, setNameError }) => {
+const PaymentInput = ({
+  state,
+  setState,
+  text,
+  type,
+  error,
+  placeholder,
+  setNameError,
+}) => {
   const [isPassVisible, setIsPassVisible] = useState(false);
 
   return (
@@ -22,7 +30,13 @@ const PaymentInput = ({ state, setState, text, type, error, placeholder, setName
             placeholder={placeholder}
             className="w-full outline-none  rounded-[12px] placeholder:text-[13px] placeholder:font-normal placeholder:text-[#6B737E] text-white bg-transparent h-full px-3 text-sm font-medium "
             value={state}
-            onChange={(e) => {setState(e.target.value); setNameError(null)}}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (value === "" || /^[^\s]/.test(value)) {
+                setState(e.target.value);
+                setNameError(null);
+              }
+            }}
           />
           <button
             type="button"
@@ -33,11 +47,11 @@ const PaymentInput = ({ state, setState, text, type, error, placeholder, setName
             }}
           >
             {type == "password" &&
-              (!isPassVisible ? <BsEyeSlash /> :  <BsEye />)}
+              (!isPassVisible ? <BsEyeSlash /> : <BsEye />)}
           </button>
         </div>
       </div>
-        {error && <p className="text-red-500 text-sm">{error}</p>}
+      {error && <p className="text-red-500 text-sm">{error}</p>}
     </div>
   );
 };

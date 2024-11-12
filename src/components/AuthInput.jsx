@@ -16,7 +16,7 @@ const AuthInput = ({
   const [isPassVisible, setIsPassVisible] = useState(false);
 
   return (
-    <div className="w-full h-auto flex   flex-col gap-1 justify-start items-start  ">
+    <div className="w-full h-auto flex flex-col gap-1 justify-start items-start  ">
       <label className="ml-1 text-sm font-medium text-[#fff] capitalize">
         {text}
       </label>

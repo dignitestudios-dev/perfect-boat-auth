@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import axios from "../axios";
 import { useContext } from "react";
-import app, {
-  auth,
-  googleProvider,
-  appleProvider,
-} from "../firebase/firebase";
+import app, { auth, googleProvider, appleProvider } from "../firebase/firebase";
 import { FacebookAuthProvider } from "firebase/auth";
 import { FaApple, FaFacebookF, FaGoogle } from "react-icons/fa";
 import { signInWithPopup } from "firebase/auth";
 import { FiLoader } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 const SocialLogin = () => {
-
+  const navigate = useNavigate();
   const [googleLoading, setGoogleLoading] = useState(false);
   const [appleLoading, setAppleLoading] = useState(false);
   const [facebookLoading, setFacebookLoading] = useState(false);
@@ -25,19 +22,21 @@ const SocialLogin = () => {
       if (result) {
         const token = await result?.user?.getIdToken();
         if (token) {
-          axios.post(`auth/social/logIn`, {
-            role: "owner",
-            firebaseIdToken: token,
-          // fcmToken:"",
+          axios
+            .post(`auth/social/logIn`, {
+              role: "owner",
+              firebaseIdToken: token,
+              // fcmToken:"",
             })
             .then(
               (response) => {
+                console.log("🚀 ~ handleAppleLogin ~ response:", response);
                 // just for now
                 sessionStorage.setItem("token", response?.data?.data?.token);
                 if (response?.data?.data?.token) {
-                  if(response?.data?.data?.isSubscribed === true){
+                  if (response?.data?.data?.isSubscribed === true) {
                     navigate("/congrats");
-                  }else{
+                  } else {
                     navigate("/buy-package");
                   }
                 }
@@ -70,19 +69,20 @@ const SocialLogin = () => {
       if (result) {
         const token = await result?.user?.getIdToken();
         if (token) {
-          axios.post(`/auth/social/logIn`, {
-            role: "owner",
-            firebaseIdToken: token,
-          // fcmToken:"",
+          axios
+            .post(`/auth/social/logIn`, {
+              role: "owner",
+              firebaseIdToken: token,
+              // fcmToken:"",
             })
             .then(
               (response) => {
                 // just for now
                 sessionStorage.setItem("token", response?.data?.data?.token);
                 if (response?.data?.data?.token) {
-                  if(response?.data?.data?.isSubscribed === true){
+                  if (response?.data?.data?.isSubscribed === true) {
                     navigate("/congrats");
-                  }else{
+                  } else {
                     navigate("/buy-package");
                   }
                 }
@@ -113,17 +113,21 @@ const SocialLogin = () => {
       const result = await signInWithPopup(auth, googleProvider);
       if (result) {
         const token = await result?.user?.getIdToken();
-        if (token) { axios.post(`/auth/social/logIn`, {
-          role: "owner",
-          firebaseIdToken: token,
-          // fcmToken:"",
-        }).then((response) => {
+        if (token) {
+          axios
+            .post(`/auth/social/logIn`, {
+              role: "owner",
+              firebaseIdToken: token,
+              // fcmToken:"",
+            })
+            .then(
+              (response) => {
                 // just for now
                 sessionStorage.setItem("token", response?.data?.data?.token);
                 if (response?.data?.data?.token) {
-                  if(response?.data?.data?.isSubscribed === true){
+                  if (response?.data?.data?.isSubscribed === true) {
                     navigate("/congrats");
-                  }else{
+                  } else {
                     navigate("/buy-package");
                   }
                 }
@@ -148,43 +152,56 @@ const SocialLogin = () => {
     }
   };
 
-    return(
-        <div className="w-full h-auto flex flex-col gap-1 justify-center items-start pt-2">
-          <div className="w-full lg:w-[434px] flex justify-center items-center">
-            <div className="grid grid-cols-3 gap-3 lg:gap-10">
-              {googleLoading?(
-                <div className="w-[108.31px] h-[88px] rounded-[16px] bg-[#1A293D] text-white text-2xl 
-                flex items-center justify-center mx-1">
-                   <FiLoader className="text-white text-[32px] animate-spin mx-auto" />
-                </div>
-              ):(
-                <div onClick={handleGoogleLogin} className="md:w-[108.31px] w-[90px] h-[88px] rounded-[16px] bg-[#1A293D] hover:bg-[#233751]
-                 text-white text-2xl flex items-center justify-center mr-2">
-                <FaGoogle />
-              </div>
-              )}
-              {facebookLoading?(
-                <div className="w-[108.31px] h-[88px] rounded-[16px] bg-[#1A293D] text-white text-2xl flex items-center justify-center">
-                   <FiLoader className="text-white text-[32px] animate-spin mx-auto" />
-                </div>
-              ):(
-              <div onClick={handleFacebookLogin} className="md:w-[108.31px] w-[90px] h-[88px] rounded-[16px] bg-[#1A293D] hover:bg-[#233751]
-               text-white text-3xl flex items-center justify-center mx-2">
-                <FaFacebookF />
-              </div>)}
-              {appleLoading?(
-                <div className="w-[108.31px] h-[88px] rounded-[16px] bg-[#1A293D] text-white text-2xl flex items-center justify-center">
-                   <FiLoader className="text-white text-[32px] animate-spin mx-auto" />
-                </div>
-              ):(
-              <div onClick={handleAppleLogin} className="md:w-[108.31px] w-[90px] h-[88px] rounded-[16px] bg-[#1A293D] hover:bg-[#233751]
-               text-white text-3xl flex items-center justify-center ml-4">
-                <FaApple />
-              </div>)}
+  return (
+    <div className="w-full h-auto flex flex-col gap-1 justify-center items-start pt-2">
+      <div className="w-full lg:w-[434px] flex justify-center items-center">
+        <div className="grid grid-cols-3 gap-3 lg:gap-10">
+          {googleLoading ? (
+            <div
+              className="w-[108.31px] h-[88px] rounded-[16px] bg-[#1A293D] text-white text-2xl 
+                flex items-center justify-center mx-1"
+            >
+              <FiLoader className="text-white text-[32px] animate-spin mx-auto" />
             </div>
-          </div>
+          ) : (
+            <div
+              onClick={handleGoogleLogin}
+              className="md:w-[108.31px] w-[90px] h-[88px] rounded-[16px] bg-[#1A293D] hover:bg-[#233751]
+                 text-white text-2xl flex items-center justify-center mr-2"
+            >
+              <FaGoogle />
+            </div>
+          )}
+          {facebookLoading ? (
+            <div className="w-[108.31px] h-[88px] rounded-[16px] bg-[#1A293D] text-white text-2xl flex items-center justify-center">
+              <FiLoader className="text-white text-[32px] animate-spin mx-auto" />
+            </div>
+          ) : (
+            <div
+              onClick={handleFacebookLogin}
+              className="md:w-[108.31px] w-[90px] h-[88px] rounded-[16px] bg-[#1A293D] hover:bg-[#233751]
+               text-white text-3xl flex items-center justify-center mx-2"
+            >
+              <FaFacebookF />
+            </div>
+          )}
+          {appleLoading ? (
+            <div className="w-[108.31px] h-[88px] rounded-[16px] bg-[#1A293D] text-white text-2xl flex items-center justify-center">
+              <FiLoader className="text-white text-[32px] animate-spin mx-auto" />
+            </div>
+          ) : (
+            <div
+              onClick={handleAppleLogin}
+              className="md:w-[108.31px] w-[90px] h-[88px] rounded-[16px] bg-[#1A293D] hover:bg-[#233751]
+               text-white text-3xl flex items-center justify-center ml-4"
+            >
+              <FaApple />
+            </div>
+          )}
         </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
 
 export default SocialLogin;

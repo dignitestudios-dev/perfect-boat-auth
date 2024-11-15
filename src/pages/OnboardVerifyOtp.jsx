@@ -4,12 +4,14 @@ import AuthSubmitBtn from "../components/AuthSubmitBtn.jsx";
 import axios from "../axios.js";
 import { ErrorToast, SuccessToast } from "../components/Toaster.jsx";
 import { useNavigate } from "react-router-dom";
+import EmailVerificationSuccessModal from "../components/EmailVerificationSuccessModal.jsx";
 
 const OnboardVerifyOtp = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [resendLoading, setResendLoading] = useState(false);
   const [otp, setOtp] = useState(Array(6).fill(""));
+  const [navigateString, setNavigateString] = useState("");
 
   const inputs = useRef([]);
   //   const {login} = useContext(AuthContext)
@@ -55,13 +57,14 @@ const OnboardVerifyOtp = () => {
       const response = await axios.post("/auth/otp/verify/email", obj);
       if (response?.status === 200) {
         setLoading(false);
-        SuccessToast("Email Verified");
+        // SuccessToast("Email Verified");
         if (response?.data?.data?.isEmailVerified === true) {
           sessionStorage.setItem("token", response?.data?.data?.token);
+          setIsVerified(true);
           if (response?.data?.data?.isSubscribed === true) {
-            navigate("/congrats");
+            setNavigateString("/congrats");
           } else {
-            navigate("/buy-package");
+            setNavigateString("/buy-package");
           }
         } else {
           // navigate("/onboard-verify-otp");
@@ -88,7 +91,7 @@ const OnboardVerifyOtp = () => {
         // navigate("/select-package");
         SuccessToast(response?.data?.message);
         setResendLoading(false);
-        setOtp(Array(6).fill(""))
+        setOtp(Array(6).fill(""));
       } else {
         ErrorToast(response?.data?.message);
       }
@@ -121,7 +124,7 @@ const OnboardVerifyOtp = () => {
           <div className="w-full h-auto grid grid-cols-6 justify-start items-center gap-4 my-4 ">
             {otp.map((digit, index) => (
               <input
-              inputmode="numeric"
+                inputmode="numeric"
                 key={index}
                 type="text"
                 maxLength="1"
@@ -145,7 +148,7 @@ const OnboardVerifyOtp = () => {
                 onClick={handleResendOtp}
                 className="outline-none text-[13px] border-none text-[#199BD1] font-bold"
               >
-                Resend now
+                {resendLoading ? "Resending..." : "Resend now"}
               </button>
             </div>
           </div>
@@ -157,6 +160,7 @@ const OnboardVerifyOtp = () => {
             <EmailVerificationSuccessModal
               isOpen={isVerified}
               setIsOpen={setIsVerified}
+              navigateString={navigateString}
             />
           )}
         </form>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { FaApple, FaFacebookF, FaGoogle } from "react-icons/fa";
 import AuthInput from "../components/AuthInput";
 import AuthSubmitBtn from "../components/AuthSubmitBtn";
@@ -7,6 +7,7 @@ import { ErrorToast, SuccessToast } from "../components/Toaster";
 import { useForm } from "react-hook-form";
 import axios from "../axios";
 import SocialLogin from "../pages/SocialLogin";
+import PhoneInput from "../components/PhoneInput";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -17,8 +18,11 @@ const Signup = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
+  const password = useRef({});
+  password.current = watch("password", "");
 
   const createAccount = async (formData) => {
     setLoading(true);
@@ -91,7 +95,7 @@ const Signup = () => {
               error={errors.email}
             />
 
-            <AuthInput
+            <PhoneInput
               register={register("phoneNumber", {
                 required: "Please enter your phone number.",
                 pattern: {
@@ -115,13 +119,14 @@ const Signup = () => {
                 required: "Please enter your password.",
                 minLength: {
                   value: 8,
-                  message: "Password must be at least 8 characters long.",
+                  message:
+                    "Password must be at least 8 characters, including uppercase, lowercase, number, and special character.",
                 },
                 pattern: {
                   value:
                     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
                   message:
-                    "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
+                    "Password must be at least 8 characters, including uppercase, lowercase, number, and special character.",
                 },
               })}
               maxLength={12}
@@ -129,6 +134,30 @@ const Signup = () => {
               placeholder={"Enter your password here"}
               type={"password"}
               error={errors.password}
+            />
+            <AuthInput
+              register={register("confPassword", {
+                required: "Please enter confirm password.",
+                minLength: {
+                  value: 8,
+                  message:
+                    "Password must be at least 8 characters, including uppercase, lowercase, number, and special character.",
+                },
+                validate: (value) =>
+                  value === password.current ||
+                  "Confirm Password does not match",
+                // pattern: {
+                //   value:
+                //     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
+                //   message:
+                //     "Password must be at least 8 characters, including uppercase, lowercase, number, and special character.",
+                // },
+              })}
+              maxLength={12}
+              text={"Confirm Password"}
+              placeholder={"Enter confirm password here"}
+              type={"password"}
+              error={errors.confPassword}
             />
           </div>
           <div className="pt-4">
@@ -159,17 +188,19 @@ const Signup = () => {
               </span>
               <button
                 type="button"
-                className="outline-none text-[16px] border-none text-[#199BD1] font-bold"
+                className="outline-none text-[12px] md:text-[16px] border-none text-[#199BD1] font-bold"
                 onClick={() => {
                   navigate("#");
                 }}
               >
                 Terms & conditions
               </button>
-              <span className="text-[16px] font-medium text-[#C2C6CB]">&</span>
+              <span className="text-[12px] md:text-[16px] font-medium text-[#C2C6CB]">
+                &
+              </span>
               <button
                 type="button"
-                className="outline-none text-[16px] border-none text-[#199BD1] font-bold"
+                className="outline-none text-[12px] md:text-[16px] border-none text-[#199BD1] font-bold"
                 onClick={() => {
                   navigate("#");
                 }}

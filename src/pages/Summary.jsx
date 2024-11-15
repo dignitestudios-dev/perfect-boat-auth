@@ -17,14 +17,14 @@ const Summary = () => {
     try {
       setSummaryLoading(true);
       const { data } = await axios.get("/owner/subscription/getSummary");
-      if(data){
+      if (data) {
         setSummary(data?.data);
         setSummaryLoading(false);
       }
     } catch (error) {
       console.log("Error:", error);
       setSummaryLoading(false);
-    } 
+    }
   };
 
   useEffect(() => {
@@ -114,9 +114,9 @@ const Summary = () => {
                 Total Amount:
               </span>
               <span className="text-[24px] font-bold text-white">
-                {summary?.subscriptionPlan?.price}
+                ${summary?.subscriptionPlan?.price}
               </span>
-              <span className="text-[12px] text-white">/month</span>
+              <span className="-ml-1 text-[12px] text-white">/month</span>
             </div>
 
             {/* Button */}

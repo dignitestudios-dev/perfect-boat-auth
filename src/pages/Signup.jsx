@@ -2,7 +2,7 @@ import React, { useContext, useRef, useState } from "react";
 import { FaApple, FaFacebookF, FaGoogle } from "react-icons/fa";
 import AuthInput from "../components/AuthInput";
 import AuthSubmitBtn from "../components/AuthSubmitBtn";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ErrorToast, SuccessToast } from "../components/Toaster";
 import { useForm } from "react-hook-form";
 import axios from "../axios";
@@ -190,7 +190,10 @@ const Signup = () => {
                 type="button"
                 className="outline-none text-[12px] md:text-[16px] border-none text-[#199BD1] font-bold"
                 onClick={() => {
-                  navigate("#");
+                  window.open(
+                    "https://app.termly.io/policy-viewer/policy.html?policyUUID=3bcd60e8-b5c1-42ea-b3a9-c232dc2d0672",
+                    "_blank"
+                  );
                 }}
               >
                 Terms & conditions
@@ -198,11 +201,22 @@ const Signup = () => {
               <span className="text-[12px] md:text-[16px] font-medium text-[#C2C6CB]">
                 &
               </span>
+              {/* <Link
+                className="outline-none text-[12px] md:text-[16px] border-none text-[#199BD1] font-bold"
+                to={{
+                  pathname:
+                    "https://example.zendesk.com/hc/en-us/articles/123456789-Privacy-Policies",
+                }}
+                target="_blank"
+              >
+                Privacy policy
+              </Link> */}
               <button
                 type="button"
                 className="outline-none text-[12px] md:text-[16px] border-none text-[#199BD1] font-bold"
                 onClick={() => {
-                  navigate("#");
+                  window.location.href =
+                    "https://app.termly.io/policy-viewer/policy.html?policyUUID=a6047de9-b149-4001-86a8-5a4051ab8411";
                 }}
               >
                 Privacy policy

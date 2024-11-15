@@ -1,9 +1,12 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineCheckCircle } from "react-icons/ai"; // React Icon for tick
 
 const Congratulations = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const { summaryPlan } = location.state || {};
 
   return (
     <div className="w-screen h-screen flex items-center justify-center bg-[#001229]">
@@ -13,10 +16,11 @@ const Congratulations = () => {
           Congratulations!
         </h1>
         <p className="text-[16px] lg:text-[18px] font-normal text-white leading-5 tracking-[-0.5px] max-w-[500px]">
-          You have successfully subscribed to the Fleet Enterprise plan. Enjoy all the premium features and benefits tailored just for you.
+          You have successfully subscribed to the {summaryPlan?.name}. Enjoy all
+          the premium features and benefits tailored just for you.
         </p>
         <p className="text-[14px] lg:text-[16px] font-normal text-[#199BD1]">
-      ⓘ Please open the mobile app to continue.
+          ⓘ Please open the mobile app to continue.
         </p>
         {/* <button
           onClick={() => navigate("/")}

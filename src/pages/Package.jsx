@@ -113,9 +113,7 @@ const Package = () => {
                      md:h-[40px] xl:h-[44px] flex items-center font-[550] justify-center`}
                 >
                   <div className="flex items-center">
-                    <span className="mr-1">
-                      Buy Now
-                    </span>
+                    <span className="mr-1">Buy Now</span>
                     {loadingBtn[index] && (
                       <FiLoader className="animate-spin text-lg mx-auto" />
                     )}

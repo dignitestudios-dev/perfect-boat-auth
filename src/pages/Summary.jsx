@@ -37,7 +37,9 @@ const Summary = () => {
       const response = await axios.post("/owner/subscription/buy");
       if (response.status === 200) {
         setLoading(false);
-        navigate("/congrats");
+        navigate("/congrats", {
+          state: { summaryPlan: summary?.subscriptionPlan },
+        });
       }
     } catch (err) {
       ErrorToast(err?.response?.data?.message);

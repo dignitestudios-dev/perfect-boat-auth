@@ -201,22 +201,14 @@ const Signup = () => {
               <span className="text-[12px] md:text-[16px] font-medium text-[#C2C6CB]">
                 &
               </span>
-              {/* <Link
-                className="outline-none text-[12px] md:text-[16px] border-none text-[#199BD1] font-bold"
-                to={{
-                  pathname:
-                    "https://example.zendesk.com/hc/en-us/articles/123456789-Privacy-Policies",
-                }}
-                target="_blank"
-              >
-                Privacy policy
-              </Link> */}
               <button
                 type="button"
                 className="outline-none text-[12px] md:text-[16px] border-none text-[#199BD1] font-bold"
                 onClick={() => {
-                  window.location.href =
-                    "https://app.termly.io/policy-viewer/policy.html?policyUUID=a6047de9-b149-4001-86a8-5a4051ab8411";
+                  window.open(
+                    "https://app.termly.io/policy-viewer/policy.html?policyUUID=a6047de9-b149-4001-86a8-5a4051ab8411",
+                    "_blank"
+                  );
                 }}
               >
                 Privacy policy

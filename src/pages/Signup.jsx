@@ -32,7 +32,7 @@ const Signup = () => {
         email: formData.email,
         password: formData.password,
         phone: formData.phoneNumber,
-        role: "owner",
+        role: "singleuser",
       };
       const response = await axios.post("/auth/signUp", obj);
 

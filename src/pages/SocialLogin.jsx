@@ -24,7 +24,7 @@ const SocialLogin = () => {
         if (token) {
           axios
             .post(`auth/social/logIn`, {
-              role: "owner",
+              role: "singleuser",
               firebaseIdToken: token,
               // fcmToken:"",
             })
@@ -71,7 +71,7 @@ const SocialLogin = () => {
         if (token) {
           axios
             .post(`/auth/social/logIn`, {
-              role: "owner",
+              role: "singleuser",
               firebaseIdToken: token,
               // fcmToken:"",
             })
@@ -116,7 +116,7 @@ const SocialLogin = () => {
         if (token) {
           axios
             .post(`/auth/social/logIn`, {
-              role: "owner",
+              role: "singleuser",
               firebaseIdToken: token,
               // fcmToken:"",
             })

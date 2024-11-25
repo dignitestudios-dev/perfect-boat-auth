@@ -5,6 +5,7 @@ import axios from "../axios.js";
 import { ErrorToast, SuccessToast } from "../components/Toaster.jsx";
 import { useNavigate } from "react-router-dom";
 import EmailVerificationSuccessModal from "../components/EmailVerificationSuccessModal.jsx";
+import CountDown from "../components/CountDown.jsx";
 
 const OnboardVerifyOtp = () => {
   const navigate = useNavigate();
@@ -12,6 +13,8 @@ const OnboardVerifyOtp = () => {
   const [resendLoading, setResendLoading] = useState(false);
   const [otp, setOtp] = useState(Array(6).fill(""));
   const [navigateString, setNavigateString] = useState("");
+  const [isActive, setIsActive] = useState(true);
+  const [seconds, setSeconds] = useState(30);
 
   const inputs = useRef([]);
   //   const {login} = useContext(AuthContext)
@@ -89,9 +92,10 @@ const OnboardVerifyOtp = () => {
 
       if (response.status === 200) {
         // navigate("/select-package");
-        SuccessToast(response?.data?.message);
+        SuccessToast("Otp has been send to your email");
         setResendLoading(false);
         setOtp(Array(6).fill(""));
+        handleRestart();
       } else {
         ErrorToast(response?.data?.message);
       }
@@ -104,6 +108,12 @@ const OnboardVerifyOtp = () => {
 
   const [isVerified, setIsVerified] = useState(false);
   // setIsVerified(true);
+
+  const handleRestart = () => {
+    setSeconds(30);
+    setIsActive(true);
+  };
+
   return (
     <div className="w-screen h-screen flex justify-center items-center lg:items-start lg:justify-start bg-[#001229]">
       <div className="w-full lg:w-1/2 px-4 py-8 lg:p-20 flex flex-col overflow-y-auto gap-8">
@@ -142,14 +152,23 @@ const OnboardVerifyOtp = () => {
               <span className="text-[13px] font-medium text-[#C2C6CB]">
                 Didn't recieve a code?
               </span>
-              <button
-                type="button"
-                disabled={resendLoading}
-                onClick={handleResendOtp}
-                className="outline-none text-[13px] border-none text-[#199BD1] font-bold"
-              >
-                {resendLoading ? "Resending..." : "Resend now"}
-              </button>
+              {isActive ? (
+                <CountDown
+                  isActive={isActive}
+                  setIsActive={setIsActive}
+                  seconds={seconds}
+                  setSeconds={setSeconds}
+                />
+              ) : (
+                <button
+                  type="button"
+                  disabled={resendLoading}
+                  onClick={handleResendOtp}
+                  className="outline-none text-[13px] border-none text-[#199BD1] font-bold"
+                >
+                  {resendLoading ? "Resending..." : "Resend now"}
+                </button>
+              )}
             </div>
           </div>
           <div className="md:w-[60%] lg:w-full">

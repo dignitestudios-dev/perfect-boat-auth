@@ -16,7 +16,7 @@ const EmailVerificationSuccessModal = ({
   }, []);
   return (
     <div
-      className={`fixed top-0 left-0 w-screen h-screen ${
+      className={`fixed top-0 left-0 w-screen h-screen z-50 ${
         isOpen ? "flex" : "hidden"
       } flex-col bg-[#001229] justify-center items-center gap-6`}
     >

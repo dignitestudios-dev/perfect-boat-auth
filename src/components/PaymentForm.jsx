@@ -8,6 +8,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { useNavigate } from "react-router-dom";
 import axios from "../axios";
+import { FiLoader } from "react-icons/fi";
 
 const CARD_ELEMENT_OPTIONS = {
   style: {
@@ -123,7 +124,10 @@ const PaymentForm = ({ cardHolderName, setNameError }) => {
           className="w-full  px-14  md:px-0 h-[48px] md:h-[52px] bg-[#199BD1] text-white rounded-[12px] 
           flex items-center justify-center text-[14px] md:text-[16px] font-bold"
         >
-          {loading ? "Loading" : "Proceed"}
+          <div className="flex items-center">
+            <span className="mr-1">Proceed</span>
+            {loading && <FiLoader className="animate-spin text-lg mx-auto" />}
+          </div>
         </button>
       </div>
     </form>

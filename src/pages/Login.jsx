@@ -84,7 +84,7 @@ const Login = () => {
             navigate("/buy-package");
           }
         } else {
-          navigate("/onboard-verify-otp");
+          navigate("/onboard-verify-otp", { state: decodedToken });
         }
         // navigate("/dashboard");
         setLoading(false);

@@ -3,12 +3,13 @@ import { AuthMockup } from "../assets/export.js";
 import AuthSubmitBtn from "../components/AuthSubmitBtn.jsx";
 import axios from "../axios.js";
 import { ErrorToast, SuccessToast } from "../components/Toaster.jsx";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import EmailVerificationSuccessModal from "../components/EmailVerificationSuccessModal.jsx";
 import CountDown from "../components/CountDown.jsx";
 
 const OnboardVerifyOtp = () => {
-  const navigate = useNavigate();
+  const { state } = useLocation();
+  console.log("🚀 ~ OnboardVerifyOtp ~ state:", state);
   const [loading, setLoading] = useState(false);
   const [resendLoading, setResendLoading] = useState(false);
   const [otp, setOtp] = useState(Array(6).fill(""));
@@ -55,7 +56,7 @@ const OnboardVerifyOtp = () => {
   const handleVerifyOtp = async (otp) => {
     setLoading(true);
     try {
-      let obj = { email: otpEmail, otp: getOtpValue() };
+      let obj = { email: state ? state : otpEmail, otp: getOtpValue() };
 
       const response = await axios.post("/auth/otp/verify/email", obj);
       if (response?.status === 200) {
@@ -92,7 +93,7 @@ const OnboardVerifyOtp = () => {
 
       if (response.status === 200) {
         // navigate("/select-package");
-        SuccessToast("Otp has been send to your email");
+        SuccessToast("OTP has been send to your email");
         setResendLoading(false);
         setOtp(Array(6).fill(""));
         handleRestart();

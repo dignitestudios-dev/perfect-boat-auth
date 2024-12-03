@@ -31,7 +31,7 @@ const Signup = () => {
         name: formData.fullName,
         email: formData.email,
         password: formData.password,
-        phone: formData.phoneNumber,
+        phone: `+1${formData.phoneNumber}`,
         role: "singleuser",
       };
       const response = await axios.post("/auth/signUp", obj);
@@ -124,12 +124,12 @@ const Signup = () => {
                 },
                 pattern: {
                   value:
-                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{6,}$/,
                   message:
                     "Password must be at least 8 characters, including uppercase, lowercase, number, and special character.",
                 },
               })}
-              maxLength={12}
+              maxLength={18}
               text={"Password"}
               placeholder={"Enter your password here"}
               type={"password"}
@@ -153,7 +153,7 @@ const Signup = () => {
                 //     "Password must be at least 8 characters, including uppercase, lowercase, number, and special character.",
                 // },
               })}
-              maxLength={12}
+              maxLength={18}
               text={"Confirm Password"}
               placeholder={"Enter confirm password here"}
               type={"password"}

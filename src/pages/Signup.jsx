@@ -116,7 +116,8 @@ const Signup = () => {
 
             <AuthInput
               register={register("password", {
-                required: "Please enter your password.",
+                required:
+                  "Password must be at least 8 characters, including uppercase, lowercase, number, and special character.",
                 minLength: {
                   value: 8,
                   message:
@@ -137,7 +138,8 @@ const Signup = () => {
             />
             <AuthInput
               register={register("confPassword", {
-                required: "Please enter confirm password.",
+                required:
+                  "Password must be at least 8 characters, including uppercase, lowercase, number, and special character.",
                 minLength: {
                   value: 8,
                   message:

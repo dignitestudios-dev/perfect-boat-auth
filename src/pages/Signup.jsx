@@ -91,7 +91,7 @@ const Signup = () => {
               })}
               text={"Email"}
               placeholder={"Enter your email address here"}
-              type={"text"}
+              type={"email"}
               error={errors.email}
             />
 

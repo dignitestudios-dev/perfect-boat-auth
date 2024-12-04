@@ -84,7 +84,9 @@ const Login = () => {
             navigate("/buy-package");
           }
         } else {
-          navigate("/onboard-verify-otp", { state: decodedToken });
+          navigate("/onboard-verify-otp", {
+            state: response?.data?.data?.userRecord,
+          });
         }
         // navigate("/dashboard");
         setLoading(false);

@@ -56,7 +56,7 @@ const OnboardVerifyOtp = () => {
   const handleVerifyOtp = async (otp) => {
     setLoading(true);
     try {
-      let obj = { email: state ? state : otpEmail, otp: getOtpValue() };
+      let obj = { email: state ? state?.email : otpEmail, otp: getOtpValue() };
 
       const response = await axios.post("/auth/otp/verify/email", obj);
       if (response?.status === 200) {
@@ -88,7 +88,7 @@ const OnboardVerifyOtp = () => {
   const handleResendOtp = async () => {
     try {
       setResendLoading(true);
-      let obj = { email: otpEmail };
+      let obj = { email: state ? state?.email : otpEmail };
       const response = await axios.post("/auth/otp/resend/email", obj);
 
       if (response.status === 200) {

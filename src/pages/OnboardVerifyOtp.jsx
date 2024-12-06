@@ -9,7 +9,6 @@ import CountDown from "../components/CountDown.jsx";
 
 const OnboardVerifyOtp = () => {
   const { state } = useLocation();
-  console.log("🚀 ~ OnboardVerifyOtp ~ state:", state);
   const [loading, setLoading] = useState(false);
   const [resendLoading, setResendLoading] = useState(false);
   const [otp, setOtp] = useState(Array(6).fill(""));
@@ -64,6 +63,10 @@ const OnboardVerifyOtp = () => {
         // SuccessToast("Email Verified");
         if (response?.data?.data?.isEmailVerified === true) {
           sessionStorage.setItem("token", response?.data?.data?.token);
+          sessionStorage.setItem(
+            "isFreeTrial",
+            response?.data?.data?.isFreeTrial
+          );
           setIsVerified(true);
           if (response?.data?.data?.isSubscribed === true) {
             setNavigateString("/congrats");

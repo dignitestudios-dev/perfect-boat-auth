@@ -9,6 +9,7 @@ const Package = () => {
   const [loading, setLoading] = useState(false);
   const [loadingBtn, setLoadingBtn] = useState([]);
   const [subscriptions, setSubscriptions] = useState([]);
+  const isFreeTrial = sessionStorage.getItem("isFreeTrial");
 
   const getNotifications = async () => {
     try {
@@ -103,6 +104,11 @@ const Package = () => {
                   <span className="text-[12px] md:text-[14px] font-normal text-white">
                     /month
                   </span>
+                  {isFreeTrial && (
+                    <span className="absolute -top-4 right-10 text-[12px] font-medium text-slate-700 bg-slate-200 p-1 rounded-3xl">
+                      Includes Free Trial
+                    </span>
+                  )}
                 </div>
 
                 <button

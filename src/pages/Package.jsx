@@ -79,7 +79,7 @@ const Package = () => {
                 <div
                   key={index}
                   className="w-auto md:w-[420px] xl:w-[440px] h-auto rounded-[20px] xl:rounded-[24px] bg-[#1A293D]
-               p-6 md:p-8 flex flex-col gap-6 justify-center items-center"
+               p-6 md:p-8 flex flex-col gap-2 justify-center items-center"
                 >
                   <span
                     className="w-auto h-[36px] md:h-[42px] bg-[#001229] text-center text-[12px] md:text-[14px]
@@ -96,6 +96,16 @@ const Package = () => {
                       {subscription?.description}
                     </span>
                   </div>
+                  <div className="flex justify-center items-center">
+                    {isFreeTrial && (
+                      <span
+                        className="text-[12px] font-medium text-slate-700
+                       bg-slate-200 p-1 rounded-3xl"
+                      >
+                        Includes Free Trial
+                      </span>
+                    )}
+                  </div>
 
                   <div className="w-auto relative flex gap-1 justify-start items-center">
                     <span className="absolute top-2 -left-4 text-lg md:text-xl font-medium text-white">
@@ -107,11 +117,6 @@ const Package = () => {
                     <span className="text-[12px] md:text-[14px] font-normal text-white">
                       /month
                     </span>
-                    {isFreeTrial && (
-                      <span className="absolute -top-4 right-10 text-[12px] font-medium text-slate-700 bg-slate-200 p-1 rounded-3xl">
-                        Includes Free Trial
-                      </span>
-                    )}
                   </div>
 
                   <button
@@ -129,7 +134,11 @@ const Package = () => {
                     </div>
                   </button>
 
-                  <ul className="h-[300px] message-container overflow-auto w-full px-4 md:px-6 xl:px-8 text-[14px] md:text-[16px] text-white font-normal flex flex-col gap-4 justify-start items-start list-disc">
+                  <ul
+                    className="h-[300px] mt-2 message-container overflow-auto w-full px-4 
+                  md:px-6 xl:px-8 text-[14px] md:text-[16px] text-white font-normal 
+                  flex flex-col gap-4 justify-start items-start list-disc"
+                  >
                     <li>{subscription?.trailDays} free trial days</li>
                     {subscription?.features.map((item, index) => (
                       <li key={index}>{item}</li>

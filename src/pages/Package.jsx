@@ -9,6 +9,7 @@ const Package = () => {
   const [loading, setLoading] = useState(false);
   const [loadingBtn, setLoadingBtn] = useState([]);
   const [subscriptions, setSubscriptions] = useState([]);
+  console.log("🚀 ~ Package ~ subscriptions:", subscriptions);
   const isFreeTrial = sessionStorage.getItem("isFreeTrial");
 
   const getNotifications = async () => {
@@ -72,68 +73,70 @@ const Package = () => {
           <PackageLoader />
         ) : (
           <div className="w-auto grid md:grid-cols-2 grid-cols-1  justify-center items-center mt-8 gap-6">
-            {subscriptions?.map((subscription, index) => (
-              <div
-                key={index}
-                className="w-auto md:w-[420px] xl:w-[440px] h-auto rounded-[20px] xl:rounded-[24px] bg-[#1A293D]
+            {subscriptions
+              ?.sort((a, b) => a.price - b.price)
+              ?.map((subscription, index) => (
+                <div
+                  key={index}
+                  className="w-auto md:w-[420px] xl:w-[440px] h-auto rounded-[20px] xl:rounded-[24px] bg-[#1A293D]
                p-6 md:p-8 flex flex-col gap-6 justify-center items-center"
-              >
-                <span
-                  className="w-auto h-[36px] md:h-[42px] bg-[#001229] text-center text-[12px] md:text-[14px]
-                 tracking-[3px] font-semibold px-3 md:px-4 text-white rounded-full flex items-center justify-center"
                 >
-                  {subscription?.name}
-                </span>
-
-                <div>
                   <span
-                    className="w-auto py-1 text-[12px] md:text-[14px] text-center
-                 tracking-[3px] font-normal px-1 md:px-1 text-white rounded-md flex items-center justify-center"
+                    className="w-auto h-[36px] md:h-[42px] bg-[#001229] text-center text-[12px] md:text-[14px]
+                 tracking-[3px] font-semibold px-3 md:px-4 text-white rounded-full flex items-center justify-center"
                   >
-                    {subscription?.description}
+                    {subscription?.name}
                   </span>
-                </div>
 
-                <div className="w-auto relative flex gap-1 justify-start items-center">
-                  <span className="absolute top-2 -left-4 text-lg md:text-xl font-medium text-white">
-                    $
-                  </span>
-                  <span className="text-[48px] md:text-[60px] xl:text-[72px] font-bold text-white">
-                    {subscription?.price}
-                  </span>
-                  <span className="text-[12px] md:text-[14px] font-normal text-white">
-                    /month
-                  </span>
-                  {isFreeTrial && (
-                    <span className="absolute -top-4 right-10 text-[12px] font-medium text-slate-700 bg-slate-200 p-1 rounded-3xl">
-                      Includes Free Trial
+                  <div>
+                    <span
+                      className="w-auto py-1 text-[12px] md:text-[14px] text-center
+                 tracking-[3px] font-normal px-1 md:px-1 text-white rounded-md flex items-center justify-center"
+                    >
+                      {subscription?.description}
                     </span>
-                  )}
-                </div>
+                  </div>
 
-                <button
-                  disabled={loadingBtn[index]}
-                  onClick={() => handlePlan(subscription?._id, index)}
-                  className={`outline-none bg-[#55C9FA] text-white rounded-full w-[100px]
-                     md:w-[110px] xl:w-[126px] h-[38px]
-                     md:h-[40px] xl:h-[44px] flex items-center font-[550] justify-center`}
-                >
-                  <div className="flex items-center">
-                    <span className="mr-1">Buy Now</span>
-                    {loadingBtn[index] && (
-                      <FiLoader className="animate-spin text-lg mx-auto" />
+                  <div className="w-auto relative flex gap-1 justify-start items-center">
+                    <span className="absolute top-2 -left-4 text-lg md:text-xl font-medium text-white">
+                      $
+                    </span>
+                    <span className="text-[48px] md:text-[60px] xl:text-[72px] font-bold text-white">
+                      {subscription?.price}
+                    </span>
+                    <span className="text-[12px] md:text-[14px] font-normal text-white">
+                      /month
+                    </span>
+                    {isFreeTrial && (
+                      <span className="absolute -top-4 right-10 text-[12px] font-medium text-slate-700 bg-slate-200 p-1 rounded-3xl">
+                        Includes Free Trial
+                      </span>
                     )}
                   </div>
-                </button>
 
-                <ul className="h-[300px] message-container overflow-auto w-full px-4 md:px-6 xl:px-8 text-[14px] md:text-[16px] text-white font-normal flex flex-col gap-4 justify-start items-start list-disc">
-                  <li>{subscription?.trailDays} free trial days</li>
-                  {subscription?.features.map((item, index) => (
-                    <li key={index}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+                  <button
+                    disabled={loadingBtn[index]}
+                    onClick={() => handlePlan(subscription?._id, index)}
+                    className={`outline-none bg-[#55C9FA] text-white rounded-full w-[100px]
+                     md:w-[110px] xl:w-[126px] h-[38px]
+                     md:h-[40px] xl:h-[44px] flex items-center font-[550] justify-center`}
+                  >
+                    <div className="flex items-center">
+                      <span className="mr-1">Buy Now</span>
+                      {loadingBtn[index] && (
+                        <FiLoader className="animate-spin text-lg mx-auto" />
+                      )}
+                    </div>
+                  </button>
+
+                  <ul className="h-[300px] message-container overflow-auto w-full px-4 md:px-6 xl:px-8 text-[14px] md:text-[16px] text-white font-normal flex flex-col gap-4 justify-start items-start list-disc">
+                    <li>{subscription?.trailDays} free trial days</li>
+                    {subscription?.features.map((item, index) => (
+                      <li key={index}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
           </div>
         )}
       </div>

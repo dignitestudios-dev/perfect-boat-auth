@@ -132,7 +132,7 @@ const OnboardVerifyOtp = () => {
               Verification
             </h1>
             <p className=" font-normal text-[17px] text-white leading-[21.6px] tracking-[-1.2px]">
-              Enter the OTP code sent to your email
+              Enter the OTP sent to your email
             </p>
           </div>
           <div className="w-full h-auto grid grid-cols-6 justify-start items-center gap-4 my-4 ">
@@ -154,7 +154,7 @@ const OnboardVerifyOtp = () => {
           <div className="w-full h-auto flex justify-center lg:flex lg:flex-col mb-10 md:justify-start md:mb-20 gap-1">
             <div className="w-full lg:w-[434px] flex lg:justify-center lg:items-center gap-1">
               <span className="text-[13px] font-medium text-[#C2C6CB]">
-                Didn't recieve a code?
+                Didn't recieve a OTP?
               </span>
               {isActive ? (
                 <CountDown

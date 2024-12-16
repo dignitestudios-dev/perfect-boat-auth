@@ -9,7 +9,6 @@ const Package = () => {
   const [loading, setLoading] = useState(false);
   const [loadingBtn, setLoadingBtn] = useState([]);
   const [subscriptions, setSubscriptions] = useState([]);
-  console.log("🚀 ~ Package ~ subscriptions:", subscriptions);
   const isFreeTrial = sessionStorage.getItem("isFreeTrial");
 
   const getNotifications = async () => {
@@ -135,7 +134,7 @@ const Package = () => {
                   </button>
 
                   <ul
-                    className="h-[300px] mt-2 message-container overflow-auto w-full px-4 
+                    className="h-[420px] mt-2 message-container overflow-auto w-full px-4 
                   md:px-6 xl:px-8 text-[14px] md:text-[16px] text-white font-normal 
                   flex flex-col gap-4 justify-start items-start list-disc"
                   >

@@ -22,7 +22,7 @@ const Congratulations = () => {
         </p>
         {isFreeTrial && (
           <p className="text-[16px] lg:text-[18px] font-normal text-white leading-5 tracking-[-0.5px] max-w-[500px]">
-            Your free trial has started.
+            Your free trial of 120 days has started.
           </p>
         )}
         <p className="text-[14px] lg:text-[16px] font-normal text-[#199BD1]">

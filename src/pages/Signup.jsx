@@ -14,6 +14,8 @@ const Signup = () => {
   // const { navigate } = useContext(GlobalContext);
   // const {signUpData} = useContext(AuthContext)
   const [loading, setLoading] = useState(false);
+  const [isAgree, setIsAgree] = useState(false);
+  const [agreementErr, setAgreementErr] = useState(false);
 
   const {
     register,
@@ -34,6 +36,12 @@ const Signup = () => {
         phone: `+1${formData.phoneNumber}`,
         role: "singleuser",
       };
+      if (!isAgree) {
+        setAgreementErr(
+          "Kindly acknowledge the policy by checking the agreement"
+        );
+        return;
+      }
       const response = await axios.post("/auth/signUp", obj);
 
       if (response.status === 200) {
@@ -161,6 +169,32 @@ const Signup = () => {
               type={"password"}
               error={errors.confPassword}
             />
+            <div className="w-full h-auto flex gap-1 justify-start items-start  ">
+              <div className=" pt-2">
+                <input
+                  type="checkbox"
+                  className="w-5 h-6 border-2 border-[#FFFFFF80] rounded-sm bg-transparent appearance-none checked:bg-white
+                                   checked:border-[#FFFFFF80] checked:ring-1 checked:after:font-[500]
+                                  checked:ring-[#FFFFFF80] checked:after:content-['✓'] checked:after:text-[#001229]
+                                   checked:after:text-[16px] checked:after:p-0.5"
+                  checked={isAgree}
+                  onChange={() => {
+                    setIsAgree(!isAgree);
+                    setAgreementErr(false);
+                  }}
+                />
+              </div>
+              <div>
+                <p className="w-[440px] pl-2 text-white/50">
+                  I agree to the terms of service and privacy policy, and i
+                  authorize the collection and use of my phone number for
+                  two-Factor authentication
+                </p>
+              </div>
+            </div>
+            {agreementErr && (
+              <p className="text-[#FF453A] text-sm -mt-3">{agreementErr}</p>
+            )}
           </div>
           <div className="pt-4">
             <AuthSubmitBtn text={"Sign Up"} loader={loading} />

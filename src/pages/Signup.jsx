@@ -169,8 +169,8 @@ const Signup = () => {
               type={"password"}
               error={errors.confPassword}
             />
-            <div className="w-full h-auto flex gap-1 justify-start items-start">
-              <div className=" pt-2">
+            <div className="w-full lg:w-[50%] h-auto flex gap-1 justify-start items-start mt-1">
+              <div className=" pt-1.5">
                 <input
                   type="checkbox"
                   className="w-5 h-6 border-2 border-[#FFFFFF80] rounded-sm bg-transparent appearance-none checked:bg-white
@@ -185,7 +185,7 @@ const Signup = () => {
                 />
               </div>
               <div>
-                <p className="w-auto pl-2 text-white/50">
+                <p className="w-auto pl-2 text-sm text-white/50">
                   I agree to the terms of service and privacy policy, and i
                   authorize the collection and use of my phone number for
                   two-Factor authentication

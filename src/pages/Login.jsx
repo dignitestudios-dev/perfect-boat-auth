@@ -26,39 +26,6 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  // const handleLogin = async (formData) => {
-  //   setLoading(true);
-  //   try {
-  //     let obj = {
-  //       email: formData.email,
-  //       password: formData.password,
-  //       role: "owner",
-  //     };
-
-  //     const response = await axios.post("/auth/signIn", obj);
-  //     if (response.status === 200) {
-  //       if (response?.data?.data?.isEmailVerified === true) {
-  //         sessionStorage.setItem("token", response?.data?.data?.token);
-  //         if (response?.data?.data?.isSubscribed === true) {
-  //           navigate("/congrats");
-  //         } else {
-  //           navigate("/buy-package");
-  //         }
-  //       } else {
-  //         navigate("/onboard-verify-otp");
-  //       }
-  //       // navigate("/dashboard");
-  //       setLoading(false);
-  //       SuccessToast("Logged in successfully");
-  //     }
-  //   } catch (err) {
-  //     console.log("🚀 ~ createAccount ~ err:", err);
-  //     ErrorToast(err?.response?.data?.message);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
   const handleTokenLogin = async () => {
     try {
       setLoadingScreen(true);

@@ -65,9 +65,9 @@ const Signup = () => {
   };
 
   return (
-    <div className="md:p-0 p-4 w-full h-full min-h-screen flex items-center justify-center bg-[#001229]">
-      <form onSubmit={handleSubmit(createAccount)}>
-        <div>
+    <div className="md:p-0 p-4 w-full h-full flex justify-center items-center bg-[#001229]">
+      <div className="md:w-auto w-full">
+        <form className="w-full h-auto" onSubmit={handleSubmit(createAccount)}>
           <h1 className="w-full justify-start items-start text-[38px] md:text-[48px] font-bold text-white leading-[64.8px] tracking-[-1.2px]">
             Signup
           </h1>
@@ -169,7 +169,7 @@ const Signup = () => {
               type={"password"}
               error={errors.confPassword}
             />
-            <div className="w-full h-auto flex gap-1 justify-start items-start  ">
+            <div className="w-full h-auto flex gap-1 justify-start items-start">
               <div className=" pt-2">
                 <input
                   type="checkbox"
@@ -185,7 +185,7 @@ const Signup = () => {
                 />
               </div>
               <div>
-                <p className="w-[440px] pl-2 text-white/50">
+                <p className="w-auto pl-2 text-white/50">
                   I agree to the terms of service and privacy policy, and i
                   authorize the collection and use of my phone number for
                   two-Factor authentication
@@ -251,8 +251,8 @@ const Signup = () => {
               </button>
             </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };

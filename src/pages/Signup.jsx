@@ -170,14 +170,11 @@ const Signup = () => {
               error={errors.confPassword}
             />
             <div className="w-full lg:w-[50%] h-auto flex gap-1 justify-start items-start mt-1">
-              <div className=" pt-1.5">
+              <div>
                 <input
                   type="checkbox"
-                  className="w-5 h-6 border-2 border-[#FFFFFF80] rounded-sm bg-transparent appearance-none checked:bg-white
-                                   checked:border-[#FFFFFF80] checked:ring-1 checked:after:font-[500]
-                                  checked:ring-[#FFFFFF80] checked:after:content-['✓'] checked:after:text-[#001229]
-                                   checked:after:text-[16px] checked:after:p-0.5"
                   checked={isAgree}
+                  className="w-4"
                   onChange={() => {
                     setIsAgree(!isAgree);
                     setAgreementErr(false);
@@ -185,15 +182,14 @@ const Signup = () => {
                 />
               </div>
               <div>
-                <p className="w-auto pl-2 text-sm text-white/50">
-                  I agree to the terms of service and privacy policy, and i
-                  authorize the collection and use of my phone number for
-                  two-Factor authentication
+                <p className="w-auto text-sm text-white/50">
+                  I authorize the collection and use of my phone number for
+                  Two-Factor authentication and in-app notifications.
                 </p>
               </div>
             </div>
             {agreementErr && (
-              <p className="text-[#FF453A] text-sm -mt-3">{agreementErr}</p>
+              <p className="text-[#FF453A] text-xs -mt-1">{agreementErr}</p>
             )}
           </div>
           <div className="pt-4">

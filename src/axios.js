@@ -9,9 +9,7 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use((request) => {
-  // let token = sessionStorage.getItem("token");
-  let token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3OWNkOWQ3ZTg2YTFlYzVhNDE4YzExNiIsImlhdCI6MTczODMzMjYzMiwiZXhwIjoxNzQ2MTA4NjMyfQ.0grvYkxQrb9rLBbXCmNe6WhIfWV0HagS46lchPPpy7g";
+  let token = sessionStorage.getItem("token");
 
   request.headers = {
     Accept: "application/json, text/plain, */*",
@@ -30,7 +28,7 @@ instance.interceptors.response.use(
     // *For unAuthorized
     if (error.response.status === 401) {
       sessionStorage.clear();
-      // window.location.href="/"
+      window.location.href = "/";
     }
     return Promise.reject(error);
   }
